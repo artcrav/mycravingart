@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Craving ART ✦ Digital Art Commission</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root{--black:#111111;--white:#fafafa;--gray:#e8e8e8;--mid:#888}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Nunito Sans','Nunito',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--white);color:var(--black);overflow-x:hidden}
+
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+  .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,250,250,.93);backdrop-filter:blur(14px);border-bottom:1.5px solid var(--gray);padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+  .nav-logo{font-family:'Nunito',sans-serif;font-weight:900;font-size:1.2rem;letter-spacing:-.5px}
+  .nav-logo span{color:var(--mid);font-weight:900}
+  .toc-wrap{position:relative}
+  .toc-btn{background:transparent;border:2px solid var(--black);padding:8px 12px;border-radius:12px;cursor:pointer;display:flex;flex-direction:column;gap:5px;transition:all .2s;width:40px;height:40px;align-items:center;justify-content:center}
+  .toc-btn:hover{background:var(--black)}
+  .toc-btn:hover .bar{background:var(--white)}
+  .bar{display:block;width:18px;height:2px;background:var(--black);border-radius:2px;transition:transform .3s ease, opacity .3s ease, width .3s ease}
+  .toc-btn.open .bar1{transform:translateY(7px) rotate(45deg)}
+  .toc-btn.open .bar2{opacity:0;width:0}
+  .toc-btn.open .bar3{transform:translateY(-7px) rotate(-45deg)}
+  .toc-btn.open{background:var(--black)}
+  .toc-btn.open .bar{background:var(--white)}
+  .toc-dropdown{position:absolute;top:calc(100% + 10px);right:0;background:var(--white);border:2px solid var(--black);border-radius:20px;padding:8px;min-width:230px;flex-direction:column;gap:2px;box-shadow:0 12px 40px rgba(0,0,0,.14);z-index:999;display:none}
+  .toc-dropdown.open{display:flex}
+  .toc-dropdown a{font-family:'Nunito',sans-serif;font-size:.82rem;font-weight:700;color:var(--black);text-decoration:none;padding:9px 14px;border-radius:12px;display:flex;align-items:center;gap:10px;transition:all .15s;white-space:nowrap}
+  .toc-dropdown a:hover{background:var(--black);color:var(--white)}
+  .toc-sym{font-size:.8rem;width:14px;text-align:center;flex-shrink:0}
+  .toc-sep{height:1px;background:var(--gray);margin:4px 6px}
+
+
+
+  .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 24px 80px;position:relative;overflow:hidden}
+  .hero-bg-dots{position:absolute;inset:0;background-image:radial-gradient(circle,#ddd 1px,transparent 1px);background-size:28px 28px;opacity:.5;pointer-events:none}
+  .hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--black);color:var(--white);font-size:.72rem;font-weight:800;padding:6px 14px;border-radius:20px;margin-bottom:20px;letter-spacing:.5px;animation:fadeUp .6s ease both}
+  .hero h1{font-family:'Nunito',sans-serif;font-size:clamp(2.8rem,8vw,5.5rem);font-weight:900;line-height:1.05;letter-spacing:-2px;margin-bottom:16px;animation:fadeUp .7s .1s ease both}
+  .hero h1 .dot{color:var(--mid)}
+  .hero-sub{font-size:clamp(.95rem,2.5vw,1.15rem);color:var(--mid);font-weight:600;max-width:480px;line-height:1.6;margin-bottom:36px;animation:fadeUp .7s .2s ease both}
+  .hero-stats{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin-bottom:40px;animation:fadeUp .7s .3s ease both}
+  .stat-pill{background:var(--white);border:2px solid var(--black);border-radius:16px;padding:10px 20px;text-align:center}
+  .stat-pill .num{font-family:'Nunito',sans-serif;font-size:1.4rem;font-weight:900;display:block}
+  .stat-pill .lbl{font-size:.7rem;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.5px}
+  .hero-cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;animation:fadeUp .7s .4s ease both}
+  .btn-primary{background:var(--black);color:var(--white);font-family:'Nunito',sans-serif;font-weight:800;font-size:.95rem;padding:14px 28px;border-radius:50px;text-decoration:none;border:2px solid var(--black);transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+  .btn-primary:hover{background:var(--white);color:var(--black);transform:translateY(-2px)}
+  .btn-secondary{background:transparent;color:var(--black);font-family:'Nunito',sans-serif;font-weight:800;font-size:.95rem;padding:14px 28px;border-radius:50px;text-decoration:none;border:2px solid var(--black);transition:all .2s}
+  .btn-secondary:hover{background:var(--black);color:var(--white);transform:translateY(-2px)}
+
+  section{padding:80px 24px}
+  .container{max-width:920px;margin:0 auto}
+  .section-tag{display:inline-block;font-size:.7rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;background:var(--black);color:var(--white);padding:4px 12px;border-radius:20px;margin-bottom:12px}
+  .section-title{font-family:'Nunito',sans-serif;font-size:clamp(1.6rem,4vw,2.4rem);font-weight:900;letter-spacing:-1px;margin-bottom:8px}
+  .section-desc{color:var(--mid);font-size:.95rem;font-weight:600;margin-bottom:36px;line-height:1.6}
+  hr.divider{border:none;border-top:1.5px solid var(--gray);margin:0}
+
+  .hours-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+  .hours-card{border:2px solid var(--black);border-radius:20px;padding:24px;transition:transform .2s}
+  .hours-card:hover{transform:translateY(-4px)}
+  .hours-card.dark{background:var(--black);color:var(--white)}
+  .hours-card .day{font-size:.72rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;opacity:.6;margin-bottom:6px}
+  .hours-card .time{font-family:'Nunito',sans-serif;font-size:1.5rem;font-weight:900;line-height:1.2;margin-bottom:4px}
+  .hours-card .note{font-size:.78rem;font-weight:600;opacity:.6}
+  .open-badge{display:inline-flex;align-items:center;gap:6px;background:var(--black);color:var(--white);font-size:.72rem;font-weight:800;padding:5px 12px;border-radius:20px;margin-top:20px}
+  .dot-live{width:6px;height:6px;background:#aaa;border-radius:50%;display:inline-block}
+
+  .can-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media(max-width:560px){.can-grid{grid-template-columns:1fr}}
+  .can-card{border:2px solid var(--black);border-radius:20px;padding:24px;transition:transform .2s}
+  .can-card:hover{transform:translateY(-3px)}
+  .can-card.dark{background:var(--black);color:var(--white)}
+  .can-card h3{font-family:'Nunito',sans-serif;font-size:1rem;font-weight:900;margin-bottom:14px}
+  .tag-list{display:flex;flex-wrap:wrap;gap:8px}
+  .tag{font-size:.75rem;font-weight:700;padding:5px 12px;border-radius:20px;border:1.5px solid var(--black)}
+  .dark .tag{border-color:rgba(255,255,255,.4)}
+  .tag.no{opacity:.5;text-decoration:line-through}
+
+  .catalogue-notice{background:var(--black);color:var(--white);border-radius:16px;padding:14px 20px;font-size:.8rem;font-weight:700;margin-bottom:28px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;line-height:1.7}
+  .catalogue-notice a{color:#ccc;text-decoration:underline}
+  .catalogue-notice a:hover{color:#fff}
+  .cat-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+  .cat-tab{font-family:'Nunito',sans-serif;font-size:.8rem;font-weight:800;padding:8px 18px;border-radius:20px;border:2px solid var(--black);background:transparent;color:var(--black);cursor:pointer;transition:all .2s}
+  .cat-tab.active,.cat-tab:hover{background:var(--black);color:var(--white)}
+  .cat-panel{display:none}
+  .cat-panel.active{display:block}
+  .cat-stitle{font-family:'Nunito',sans-serif;font-size:.7rem;font-weight:900;text-transform:uppercase;letter-spacing:1.5px;color:var(--mid);margin:24px 0 12px}
+  .cat-stitle:first-child{margin-top:0}
+  .cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:10px}
+  .cat-item{border:1.5px solid var(--gray);border-radius:14px;padding:14px 16px;text-decoration:none;color:var(--black);transition:all .18s;display:flex;flex-direction:column;gap:4px}
+  .cat-item:hover{border-color:var(--black);background:var(--black);color:var(--white);transform:translateY(-2px)}
+  .ci-name{font-family:'Nunito',sans-serif;font-size:.85rem;font-weight:800}
+  .ci-price{font-size:.78rem;font-weight:700;color:var(--mid)}
+  .cat-item:hover .ci-price{color:#bbb}
+  .ci-badge{display:inline-block;font-size:.62rem;font-weight:900;padding:2px 8px;border-radius:20px;border:1.5px solid currentColor;width:fit-content;margin-top:2px}
+  .fees-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+  .fee-card{border:2px solid var(--black);border-radius:18px;padding:20px}
+  .fc-title{font-size:.7rem;font-weight:900;text-transform:uppercase;letter-spacing:1px;color:var(--mid);margin-bottom:12px}
+  .fee-card ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .fee-card li{font-size:.82rem;font-weight:600;display:flex;justify-content:space-between;gap:8px}
+  .fee-card li span{font-weight:900;white-space:nowrap}
+  .experiment-note{border:1.5px dashed var(--gray);border-radius:14px;padding:14px 16px;font-size:.78rem;font-weight:600;color:var(--mid);margin-top:10px;line-height:1.6}
+
+  .price-info{background:var(--black);color:var(--white);border-radius:24px;padding:36px;margin-bottom:20px}
+  .price-info h3{font-family:'Nunito',sans-serif;font-size:2rem;font-weight:900;margin-bottom:4px}
+  .price-info p{opacity:.6;font-size:.9rem;font-weight:600}
+  .rush-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+  .rush-card{border:2px solid var(--black);border-radius:20px;padding:20px;transition:transform .2s}
+  .rush-card:hover{transform:translateY(-3px)}
+  .rush-card .type{font-size:.7rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--mid);margin-bottom:10px}
+  .rush-card ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+  .rush-card li{font-size:.82rem;font-weight:600;display:flex;justify-content:space-between}
+  .rush-card li span{font-weight:800}
+
+  .batch-box{border:2px solid var(--black);border-radius:24px;padding:32px}
+  .batch-box .big{font-family:'Nunito',sans-serif;font-size:1.8rem;font-weight:900;margin-bottom:8px}
+  .batch-box p{color:var(--mid);font-size:.9rem;font-weight:600;line-height:1.7}
+  .batch-meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+  .meta-chip{border:2px solid var(--black);border-radius:14px;padding:8px 16px;font-size:.78rem;font-weight:800}
+  .meta-chip.dark{background:var(--black);color:var(--white)}
+  .meta-chip a{color:inherit;text-decoration:none}
+  .meta-chip a:hover{text-decoration:underline}
+
+  .usage-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+  .usage-card{border:2px solid var(--black);border-radius:20px;padding:24px;transition:transform .2s}
+  .usage-card:hover{transform:translateY(-3px)}
+  .usage-card .ulabel{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;display:block;color:var(--mid)}
+  .usage-card h3{font-family:'Nunito',sans-serif;font-size:1.05rem;font-weight:900;margin-bottom:10px}
+  .pchip{display:inline-block;background:var(--black);color:var(--white);font-size:.78rem;font-weight:800;padding:4px 12px;border-radius:20px;margin-bottom:12px}
+  .usage-card p{font-size:.8rem;color:var(--mid);font-weight:600;line-height:1.6}
+
+  .loyalty-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media(max-width:560px){.loyalty-grid{grid-template-columns:1fr}}
+  .loyalty-card{border:2px solid var(--black);border-radius:20px;padding:24px;transition:transform .2s;text-decoration:none;color:var(--black);display:block}
+  .loyalty-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.1);color:var(--black)}
+  .loyalty-card.dark{background:var(--black);color:var(--white)}
+  .loyalty-card.dark:hover{color:var(--white)}
+  .loyalty-card h3{font-family:'Nunito',sans-serif;font-size:1.1rem;font-weight:900;margin-bottom:10px}
+  .loyalty-card p{font-size:.82rem;font-weight:600;line-height:1.7;opacity:.75}
+  .stamp-row{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+  .stamp{width:30px;height:30px;border-radius:50%;border:2px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:900}
+  .stamp.filled{background:currentColor}
+  .stamp.filled span{color:var(--white)}
+  .dark .stamp.filled span{color:var(--black)}
+
+  .snk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+  .snk-item{border:2px solid var(--gray);border-radius:16px;padding:16px 20px;display:flex;align-items:flex-start;gap:12px;font-size:.83rem;font-weight:600;line-height:1.6;color:#444;transition:border-color .2s;word-break:break-word;overflow-wrap:break-word}
+  .snk-item:hover{border-color:var(--black);color:var(--black)}
+  .snk-item .snk-text{flex:1;min-width:0}
+  .snk-item a{color:inherit;font-weight:800;text-decoration:underline;word-break:break-all}
+  .snk-num{font-family:'Nunito',sans-serif;font-size:.72rem;font-weight:900;width:24px;height:24px;min-width:24px;border-radius:50%;background:var(--black);color:var(--white);display:flex;align-items:center;justify-content:center;margin-top:1px}
+  .snk-item.highlight{background:#111;color:#fff;border-color:#111}
+  .snk-item.highlight .snk-num{background:#fff;color:#111}
+  .snk-item.ref-item{background:var(--gray);border-color:var(--gray);color:var(--black)}
+  .snk-item.ref-item:hover{border-color:var(--black);background:#eee}
+
+  .links-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+  .link-card{border:2px solid var(--black);border-radius:20px;padding:20px;text-align:center;text-decoration:none;color:var(--black);transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .link-card:hover{background:var(--black);color:var(--white);transform:translateY(-3px)}
+  .link-card .licon{font-size:1.2rem;line-height:1}
+  .link-card .lname{font-family:'Nunito',sans-serif;font-size:.88rem;font-weight:900}
+  .link-card .ldesc{font-size:.7rem;font-weight:600;opacity:.6}
+
+  .float-btn{position:fixed;bottom:28px;right:24px;z-index:200;background:var(--black);color:var(--white);font-family:'Nunito',sans-serif;font-weight:900;font-size:.9rem;padding:14px 22px;border-radius:50px;text-decoration:none;display:flex;align-items:center;gap:8px;box-shadow:0 8px 30px rgba(0,0,0,.22);transition:all .2s;animation:pulse 2.5s ease-in-out infinite}
+  .float-btn:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 14px 40px rgba(0,0,0,.3)}
+
+  footer{background:var(--black);color:var(--white);padding:48px 24px;text-align:center}
+  .f-logo{font-family:'Nunito',sans-serif;font-weight:900;font-size:1.6rem;margin-bottom:8px}
+  .f-sub{opacity:.5;font-size:.82rem;font-weight:600;margin-bottom:24px}
+  .f-links{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:24px}
+  .f-links a{color:rgba(255,255,255,.6);font-size:.8rem;font-weight:700;text-decoration:none;transition:color .2s}
+  .f-links a:hover{color:#fff}
+  .f-copy{opacity:.3;font-size:.72rem}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes pulse{0%,100%{box-shadow:0 8px 30px rgba(0,0,0,.22)}50%{box-shadow:0 8px 40px rgba(0,0,0,.38)}}
+  @media(max-width:640px){.hero h1{letter-spacing:-1px}}
+
+
+
+
+
+  /* POLAR BEAR HEAD */
+  .bear-svg{width:72px;height:72px;overflow:visible}
+  @keyframes zFloat{
+    0%  {opacity:0;transform:translate(0px,0px) scale(.8)}
+    30% {opacity:1}
+    100%{opacity:0;transform:translate(6px,-30px) scale(1.1)}
+  }
+  .z1{animation:zFloat 2.8s ease-out 0.0s infinite;opacity:0}
+  .z2{animation:zFloat 2.8s ease-out 0.9s infinite;opacity:0}
+  .z3{animation:zFloat 2.8s ease-out 1.8s infinite;opacity:0}
+
+
+  /* HIDE NATIVE SCROLLBAR, keep scroll functional */
+  html{scrollbar-width:none}
+  body::-webkit-scrollbar{display:none}
+
+  /* CUSTOM SCROLLBAR */
+  .custom-scroll-track{
+    position:fixed;right:6px;top:0;bottom:0;width:4px;
+    background:#e0e0e0;border-radius:99px;z-index:8000;pointer-events:none;
+  }
+  .custom-scroll-thumb{
+    position:absolute;right:0;width:4px;
+    background:#111;border-radius:99px;
+    min-height:32px;transition:width .15s;
+  }
+  .scroll-bear-face{
+    position:absolute;right:-10px;top:-14px;
+    width:24px;height:24px;
+    filter:drop-shadow(0 1px 3px rgba(0,0,0,.2));
+    overflow:visible;
+    transition:top .08s linear;
+  }
+
+
+  /* HIDE NATIVE SCROLLBAR */
+  html{scrollbar-width:none}
+  body::-webkit-scrollbar{display:none}
+
+  /* CUSTOM SCROLLBAR TRACK */
+  #sb-track{
+    position:fixed;right:10px;top:0;bottom:0;
+    width:8px;z-index:8000;pointer-events:none;
+  }
+  #sb-track-bg{
+    position:absolute;top:0;bottom:0;left:0;right:0;
+    background:#ddd;border-radius:99px;
+  }
+  #sb-thumb{
+    position:absolute;left:0;right:0;
+    background:#111;border-radius:99px;
+    min-height:48px;
+    transition:top .08s linear;
+  }
+  /* bear head sits on top of thumb */
+  #sb-bear{
+    position:absolute;top:-16px;left:50%;
+    transform:translateX(-50%);
+    width:28px;height:28px;
+    overflow:visible;
+    filter:drop-shadow(0 1px 4px rgba(0,0,0,.2));
+  }
+
+
+  /* NAV ZZZ */
+  .nav-zzz{display:inline-flex;align-items:flex-end;gap:2px;margin-left:5px;position:relative;top:-1px}
+  .nz{font-family:'Nunito',sans-serif;font-weight:900;color:var(--mid);opacity:0;animation:nzFloat 2.8s ease-in-out infinite;line-height:1}
+  .nz1{font-size:.6rem;animation-delay:0s}
+  .nz2{font-size:.75rem;animation-delay:.5s}
+  .nz3{font-size:.9rem;animation-delay:1s}
+  @keyframes nzFloat{0%{opacity:0;transform:translate(0,4px) scale(.8)}35%{opacity:.75}100%{opacity:0;transform:translate(7px,-12px) scale(1.15)}}
+  @keyframes bearFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  @keyframes zFloat{0%{opacity:0;transform:translate(0,0) scale(.8)}40%{opacity:.8}100%{opacity:0;transform:translate(8px,-14px) scale(1.1)}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Craving<span>ART</span> ✦<span class="nav-zzz"><span class="nz nz1">z</span><span class="nz nz2">z</span><span class="nz nz3">z</span></span></div>
+  <div class="toc-wrap">
+    <button class="toc-btn" id="tocBtn" onclick="toggleToc()" aria-label="Menu">
+      <span class="bar bar1"></span>
+      <span class="bar bar2"></span>
+      <span class="bar bar3"></span>
+    </button>
+    <div class="toc-dropdown" id="tocDropdown">
+      <a href="#jadwal" onclick="closeToc()"><span class="toc-sym">➜</span> Jam Operasional</a>
+      <a href="#layanan" onclick="closeToc()"><span class="toc-sym">➜</span> Layanan</a>
+      <a href="#catalogue" onclick="closeToc()"><span class="toc-sym">➜</span> Catalogue & Pricelist</a>
+      <a href="#harga" onclick="closeToc()"><span class="toc-sym">➜</span> Rush Fee</a>
+      <div class="toc-sep"></div>
+      <a href="#batch" onclick="closeToc()"><span class="toc-sym">➜</span> Sistem Batch</a>
+      <a href="#hak" onclick="closeToc()"><span class="toc-sym">➜</span> Hak Penggunaan</a>
+      <a href="#loyalty" onclick="closeToc()"><span class="toc-sym">➜</span> Program Pelanggan</a>
+      <a href="#snk" onclick="closeToc()"><span class="toc-sym">➜</span> Syarat & Ketentuan</a>
+      <div class="toc-sep"></div>
+      <a href="#links" onclick="closeToc()"><span class="toc-sym">➜</span> Link Penting</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-dots"></div>
+  <div class="hero-badge">✦ Digital Art Commission</div>
+  <h1>Craving<span class="dot">ART</span></h1>
+  <p class="hero-sub">Custom digital art yang lucu, personal, dan penuh cinta — chibi, bunga, cake, pet, dan masih banyak lagi</p>
+  <div class="hero-stats">
+    <div class="stat-pill"><span class="num">700+</span><span class="lbl">Pelanggan Puas</span></div>
+    <div class="stat-pill"><span class="num">7k–50k+</span><span class="lbl">Range Harga</span></div>
+    <div class="stat-pill"><span class="num">2021</span><span class="lbl">Buka Sejak</span></div>
+    <div class="stat-pill"><span class="num">15–20</span><span class="lbl">Slot / Batch</span></div>
+  </div>
+  <div class="hero-cta">
+    <a href="https://t.me/jajanmurahbot" target="_blank" class="btn-primary">➜ Konsultasi Art</a>
+    <a href="#catalogue" class="btn-secondary">★ Lihat Katalog</a>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- JAM OPERASIONAL -->
+<section id="jadwal">
+  <div class="container">
+    <div class="reveal"><span class="section-tag">★ Jadwal</span></div>
+    <h2 class="section-title reveal d1">Jam Operasional</h2>
+    <p class="section-desc reveal d2">Pastikan order dan pertanyaan kamu dikirim dalam jam aktif ya!</p>
+    <div class="hours-grid">
+      <div class="hours-card dark reveal d1">
+        <div class="day">Senin – Jumat</div>
+        <div class="time">10.00 – 20.00 WIB</div>
+        <div class="note">Semua jenis order diterima</div>
+      </div>
+      <div class="hours-card reveal d2">
+        <div class="day">Sabtu – Minggu</div>
+        <div class="time">Rush Only</div>
+        <div class="note">Hanya order rush yang dilayani</div>
+      </div>
+      <div class="hours-card reveal d3">
+        <div class="day">Open Order</div>
+        <div class="time">Jum – Ming</div>
+        <div class="note">15–20 slot · 1× seminggu</div>
+        <div class="open-badge"><span class="dot-live"></span> Batch Mingguan</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- LAYANAN -->
+<section id="layanan">
+  <div class="container">
+    <div class="reveal"><span class="section-tag">✶ Layanan</span></div>
+    <h2 class="section-title reveal d1">Apa yang Bisa Digambar?</h2>
+    <p class="section-desc reveal d2">Tersedia dua tipe: <strong>Commission</strong> (fully custom) dan <strong>YCH</strong> (Your Character Here — lebih cepat & terjangkau).</p>
+    <div class="can-grid">
+      <div class="can-card dark reveal d1">
+        <h3>✚ Yang Bisa Digambar</h3>
+        <div class="tag-list">
+          <span class="tag">Karakter OC</span><span class="tag">Fanart (personal)</span><span class="tag">Chibi</span><span class="tag">Bunga</span><span class="tag">Makanan / Cake</span><span class="tag">Couple Art</span><span class="tag">Hewan peliharaan</span><span class="tag">Background simple</span><span class="tag">Recolor</span><span class="tag">Ganti outfit</span><span class="tag">Idol / Anime / Game</span><span class="tag">Tema cute & soft</span>
+        </div>
+      </div>
+      <div class="can-card reveal d2">
+        <h3>✱ Yang Tidak Bisa</h3>
+        <div class="tag-list">
+          <span class="tag">NSFW / R18</span><span class="tag">Mecha kompleks</span><span class="tag">Gore / kekerasan</span><span class="tag">Armor penuh</span><span class="tag">Potret realistis</span><span class="tag">Konten ofensif</span><span class="tag">Tugas sekolah</span><span class="tag">Disney / Sanrio</span><span class="tag">Nintendo / Marvel</span><span class="tag">IP ketat lainnya</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- CATALOGUE -->
+<section id="catalogue">
+  <div class="container">
+    <div class="reveal"><span class="section-tag">✦ Katalog & Harga</span></div>
+    <h2 class="section-title reveal d1">Catalogue & Pricelist</h2>
+    <p class="section-desc reveal d2">Dibuat untuk kamu yang suka visual cute, soft, dan clean — cocok untuk hadiah, profile picture, dan koleksi pribadi.</p>
+    <div class="catalogue-notice reveal d3">
+      <span>Harga bervariasi 7k – 50k+ tergantung tipe karya · Pembayaran via QRIS di muka · Harga dan katalog dapat berubah sewaktu-waktu · Untuk update terbaru pantau channel ➜ <a href="https://t.me/artcraving" target="_blank">@artcraving</a></span>
+    </div>
+    <div class="cat-tabs reveal d3">
+      <button class="cat-tab active" onclick="switchTab('commission')">✦ Commission Art</button>
+      <button class="cat-tab" onclick="switchTab('chibi')">★ Chibi Collection</button>
+      <button class="cat-tab" onclick="switchTab('creative')">✶ Creative Collections</button>
+      <button class="cat-tab" onclick="switchTab('fees')">✚ Fees & Add-on</button>
+    </div>
+
+    <!-- COMMISSION -->
+    <div class="cat-panel active reveal" id="panel-commission">
+      <div class="cat-stitle">✦ Commission Art</div>
+      <div class="cat-grid">
+        <a href="https://t.me/artcraving/763" target="_blank" class="cat-item"><div class="ci-name">Commis · Chibi</div><div class="ci-price">15k – 75k</div></a>
+        <a href="https://t.me/artcraving/657" target="_blank" class="cat-item"><div class="ci-name">Commis · Flower</div><div class="ci-price">10k – 32k</div></a>
+        <a href="https://t.me/artcraving/671" target="_blank" class="cat-item"><div class="ci-name">Commis · Cake</div><div class="ci-price">10k – 28k</div></a>
+        <a href="https://t.me/artcraving/761" target="_blank" class="cat-item"><div class="ci-name">Commis · Pet</div><div class="ci-price">15k – 50k</div></a>
+        <a href="https://t.me/artcraving/761" target="_blank" class="cat-item"><div class="ci-name">Commis · Custom</div><div class="ci-price">Mulai 10k</div></a>
+      </div>
+      <div class="cat-stitle" style="margin-top:28px">✱ Experiment Art</div>
+      <div class="cat-grid">
+        <a href="https://t.me/artcraving/1293" target="_blank" class="cat-item"><div class="ci-name">Setangkai · Bunga</div><div class="ci-price">Seikhlasnya min. 5k</div><span class="ci-badge">✱ experiment</span></a>
+        <a href="https://t.me/artcraving/1433" target="_blank" class="cat-item"><div class="ci-name">Seekor · Ikan</div><div class="ci-price">Seikhlasnya min. 5k</div><span class="ci-badge">✱ experiment</span></a>
+        <a href="https://t.me/cravingsong/242" target="_blank" class="cat-item"><div class="ci-name">Seporsi · Jajan</div><div class="ci-price">Seikhlasnya min. 5k</div><span class="ci-badge">✱ experiment</span></a>
+      </div>
+      <div class="experiment-note">✱ Experiment art = no rush · bayar seikhlasnya minimal 5k</div>
+    </div>
+
+    <!-- CHIBI -->
+    <div class="cat-panel" id="panel-chibi">
+      <div class="cat-stitle">★ YCH · Chibi</div>
+      <div class="cat-grid">
+        <a href="https://t.me/artcraving/257" target="_blank" class="cat-item"><div class="ci-name">YCH · Carry</div><div class="ci-price">25k</div></a>
+        <a href="https://t.me/artcraving/269" target="_blank" class="cat-item"><div class="ci-name">YCH · Cimit</div><div class="ci-price">20k</div><span class="ci-badge">★ best seller</span></a>
+        <a href="https://t.me/artcraving/261" target="_blank" class="cat-item"><div class="ci-name">YCH · Rose</div><div class="ci-price">25k</div><span class="ci-badge">★ best seller</span></a>
+        <a href="https://t.me/artcraving/273" target="_blank" class="cat-item"><div class="ci-name">YCH · Fan</div><div class="ci-price">20k</div></a>
+        <a href="https://t.me/artcraving/277" target="_blank" class="cat-item"><div class="ci-name">YCH · Crush</div><div class="ci-price">20k</div></a>
+        <a href="https://t.me/artcraving/281" target="_blank" class="cat-item"><div class="ci-name">YCH · Sitdown</div><div class="ci-price">15k</div><span class="ci-badge">❥ fav</span></a>
+        <a href="https://t.me/artcraving/285" target="_blank" class="cat-item"><div class="ci-name">YCH · Kenyot</div><div class="ci-price">20k</div><span class="ci-badge">❥ fav</span></a>
+        <a href="https://t.me/artcraving/295" target="_blank" class="cat-item"><div class="ci-name">YCH · Letter</div><div class="ci-price">20k</div></a>
+        <a href="https://t.me/artcraving/303" target="_blank" class="cat-item"><div class="ci-name">YCH · Sleep</div><div class="ci-price">25k</div></a>
+        <a href="https://t.me/artcraving/307" target="_blank" class="cat-item"><div class="ci-name">YCH · Blue</div><div class="ci-price">35k</div><span class="ci-badge">✦ premium</span></a>
+        <a href="https://t.me/artcraving/390" target="_blank" class="cat-item"><div class="ci-name">YCH · Ride</div><div class="ci-price">35k</div><span class="ci-badge">✦ premium</span></a>
+      </div>
+      <div class="cat-stitle" style="margin-top:28px">✶ Ready Art</div>
+      <div class="cat-grid">
+        <a href="https://t.me/artcraving/406" target="_blank" class="cat-item"><div class="ci-name">Ready · BxB Hug</div><div class="ci-price">10k</div></a>
+        <a href="https://t.me/artcraving/422" target="_blank" class="cat-item"><div class="ci-name">Ready · BxG Pat</div><div class="ci-price">10k</div></a>
+        <a href="https://t.me/artcraving/450" target="_blank" class="cat-item"><div class="ci-name">Ready · 1× Sell</div><div class="ci-price">20k – 50k</div></a>
+      </div>
+      <div class="cat-stitle" style="margin-top:28px">✸ Motion Art</div>
+      <div class="cat-grid">
+        <a href="https://t.me/artcraving/469" target="_blank" class="cat-item"><div class="ci-name">Motion A</div><div class="ci-price">25k – 35k</div></a>
+        <a href="https://t.me/artcraving/509" target="_blank" class="cat-item"><div class="ci-name">Motion B</div><div class="ci-price">25k – 35k</div></a>
+        <a href="https://t.me/artcraving/574" target="_blank" class="cat-item"><div class="ci-name">Motion C</div><div class="ci-price">25k – 35k</div></a>
+        <a href="https://t.me/artcraving/585" target="_blank" class="cat-item"><div class="ci-name">Motion D</div><div class="ci-price">25k – 35k</div></a>
+        <a href="https://t.me/artcraving/594" target="_blank" class="cat-item"><div class="ci-name">Motion E</div><div class="ci-price">25k – 35k</div></a>
+      </div>
+    </div>
+
+    <!-- CREATIVE -->
+    <div class="cat-panel" id="panel-creative">
+      <div class="cat-stitle">✶ Serasa</div>
+      <div class="cat-grid">
+        <a href="https://t.me/artcraving/613" target="_blank" class="cat-item"><div class="ci-name">Serasa · Flower A</div><div class="ci-price">7k</div></a>
+        <a href="https://t.me/artcraving/618" target="_blank" class="cat-item"><div class="ci-name">Serasa · Flower B</div><div class="ci-price">7k</div></a>
+        <a href="https://t.me/artcraving/660" target="_blank" class="cat-item"><div class="ci-name">Serasa · Cake A</div><div class="ci-price">7k</div></a>
+        <a href="https://t.me/artcraving/662" target="_blank" class="cat-item"><div class="ci-name">Serasa · Cake B</div><div class="ci-price">7k</div></a>
+        <a href="https://t.me/artcraving/678" target="_blank" class="cat-item"><div class="ci-name">Serasa · Chibi Line Art</div><div class="ci-price">7k</div></a>
+      </div>
+      <div class="cat-stitle" style="margin-top:28px">❥ Sejiwa</div>
+      <div class="cat-grid">
+        <a href="https://t.me/artcraving/699" target="_blank" class="cat-item"><div class="ci-name">Sejiwa · Doodle Art</div><div class="ci-price">10k</div></a>
+        <a href="https://t.me/artcraving/712" target="_blank" class="cat-item"><div class="ci-name">Sejiwa · Healing Letter</div><div class="ci-price">10k</div></a>
+        <a href="https://t.me/artcraving/703" target="_blank" class="cat-item"><div class="ci-name">Sejiwa · Colored Sketch</div><div class="ci-price">25k</div></a>
+        <a href="https://t.me/artcraving/714" target="_blank" class="cat-item"><div class="ci-name">Sejiwa · About Us/Me</div><div class="ci-price">20k</div></a>
+        <a href="https://t.me/artcraving/709" target="_blank" class="cat-item"><div class="ci-name">Sejiwa · Love Letter</div><div class="ci-price">20k</div></a>
+      </div>
+    </div>
+
+    <!-- FEES -->
+    <div class="cat-panel" id="panel-fees">
+      <div class="fees-grid">
+        <div class="fee-card"><div class="fc-title">➜ Inrush Fee</div><ul><li>Slot tersedia <span>1–3/hari</span></li><li>Biaya <span>3k – 18k</span></li><li>Durasi <span>1 jam – 10 hari</span></li></ul></div>
+        <div class="fee-card"><div class="fc-title">✦ Commercial Use</div><ul><li>Non-jual <span>+100%</span></li><li>Untuk dijual <span>+200%</span></li></ul></div>
+        <div class="fee-card"><div class="fc-title">✚ Additional Request</div><ul><li>Text / scribble <span>0k – 5k</span></li><li>Stuff <span>75% harga</span></li><li>Take YCH unit <span>85% harga</span></li><li>Costume <span>10k – 50k</span></li><li>Background <span>0k – 50k</span></li></ul></div>
+        <div class="fee-card"><div class="fc-title">★ Speed Paint Add-on</div><ul><li>1 min (hard wm) <span>+200%</span></li><li>1 min (soft wm, pu) <span>+300%</span></li><li>1 min (no wm, cu) <span>+400%</span></li></ul><p style="font-size:.72rem;color:var(--mid);margin-top:10px;font-weight:600">Semua video proses adalah milik artist.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- RUSH FEE -->
+<section id="harga">
+  <div class="container">
+    <div class="reveal"><span class="section-tag">➜ Biaya Rush</span></div>
+    <h2 class="section-title reveal d1">Rush Fee</h2>
+    <p class="section-desc reveal d2">Butuh lebih cepat? Tambahkan rush fee untuk prioritas antrian. Rush = prioritas, bukan harga karya.</p>
+    <div class="rush-grid">
+      <div class="rush-card reveal d1"><div class="type">➜ Rush YCH</div><ul><li>1–3 jam <span>+10k</span></li><li>3–6 jam <span>+7k</span></li><li>6–12 jam <span>+4k</span></li></ul></div>
+      <div class="rush-card reveal d2"><div class="type">➜ Rush Serasa</div><ul><li>1–3 jam <span>+5k</span></li><li>3–6 jam <span>+4k</span></li><li>6–12 jam <span>+3k</span></li></ul></div>
+      <div class="rush-card reveal d3"><div class="type">➜ Rush Commission</div><ul><li>1–2 hari <span>+18k</span></li><li>3–4 hari <span>+13k</span></li><li>5–7 hari <span>+10k</span></li></ul></div>
+    </div>
+    <p class="reveal" style="margin-top:14px;font-size:.78rem;color:var(--mid);font-weight:600">✶ Rush di luar jam operasional dikenakan 2× biaya normal.</p>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- BATCH -->
+<section id="batch">
+  <div class="container">
+    <div class="reveal"><span class="section-tag">✸ Sistem Order</span></div>
+    <h2 class="section-title reveal d1">Sistem Batch & Antrean</h2>
+    <p class="section-desc reveal d2">Order dibuka secara berkala untuk menjaga kualitas dan antrean yang teratur.</p>
+    <div class="batch-box reveal d2">
+      <div class="big">✦ Batch Mingguan</div>
+      <p>Order dibuka setiap <strong>Jumat–Minggu</strong>, tersedia <strong>15–20 slot</strong> per batch. Dapat ditutup lebih awal jika penuh. Batch baru bisa dibuka meskipun batch sebelumnya masih berjalan — seluruh order mengikuti urutan antrean.</p>
+      <div class="batch-meta">
+        <div class="meta-chip dark">Jum – Ming</div>
+        <div class="meta-chip">15–20 Slot</div>
+        <div class="meta-chip">2–14 Hari Kerja</div>
+        <div class="meta-chip"><a href="https://desmonwaren-cell.github.io/progressart/" target="_blank">Antrean</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- HAK PENGGUNAAN -->
+<section id="hak">
+  <div class="container">
+    <div class="reveal"><span class="section-tag">✱ Hak Karya</span></div>
+    <h2 class="section-title reveal d1">Lisensi & Hak Penggunaan</h2>
+    <p class="section-desc reveal d2">Hak cipta karya tetap milik artist. Penggunaan di luar kesepakatan wajib konfirmasi ulang.</p>
+    <div class="usage-grid">
+      <div class="usage-card reveal d1"><span class="ulabel">Personal</span><h3>Non-Komersial</h3><div class="pchip">+0%</div><p>Untuk keperluan pribadi, sosial, atau komunitas non-profit. Boleh posting dengan kredit.</p></div>
+      <div class="usage-card reveal d2"><span class="ulabel">Branding / Promosi</span><h3>Komersial Non-Jual</h3><div class="pchip">+100%</div><p>Untuk branding kampus, perusahaan, event berbayar, atau identitas institusi.</p></div>
+      <div class="usage-card reveal d3"><span class="ulabel">Bisnis / Merchandise</span><h3>Komersial Jual</h3><div class="pchip">+200%</div><p>Untuk merchandise, produk dijual, fundraising berbayar, atau distribusi ulang.</p></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- LOYALTY -->
+<section id="loyalty">
+  <div class="container">
+    <div class="reveal"><span class="section-tag">❥ Program</span></div>
+    <h2 class="section-title reveal d1">Program Pelanggan</h2>
+    <p class="section-desc reveal d2">Dua cara seru buat dapetin reward dari Craving ART!</p>
+    <div class="loyalty-grid">
+      <a href="https://telegra.ph/FAMILY-CARDLOYALTY-CARD-03-03" target="_blank" class="loyalty-card dark reveal d1" style="text-decoration:none;display:block">
+        <h3>✦ Family Card</h3>
+        <div class="stamp-row">
+          <div class="stamp filled"><span>★</span></div>
+          <div class="stamp filled"><span>★</span></div>
+          <div class="stamp filled"><span>★</span></div>
+          <div class="stamp">✧</div>
+          <div class="stamp">✧</div>
+        </div>
+        <p>Kumpulkan stempel dari setiap pembelian min. 20k. Tukarkan stempel dengan reward menarik! Kartu bersifat pribadi dan tidak dapat dipindahtangankan.</p>
+      </a>
+      <a href="https://telegra.ph/sahabART-02-05" target="_blank" class="loyalty-card reveal d2" style="text-decoration:none;display:block">
+        <h3>❥ SahabART</h3>
+        <p>Referral teman yang berhasil melakukan pembayaran = kamu dapat reward! Satu referral dihitung 1×. Reward tidak bisa diuangkan dan tidak dapat dipindahtangankan ke akun lain.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- SNK -->
+<section id="snk">
+  <div class="container">
+    <div class="reveal"><span class="section-tag">✶ Ketentuan</span></div>
+    <h2 class="section-title reveal d1">Syarat & Ketentuan</h2>
+    <p class="section-desc reveal d2">Melakukan order berarti kamu sudah membaca dan menyetujui semua poin berikut.</p>
+    <div class="snk-grid reveal d2">
+      <div class="snk-item"><div class="snk-num">0</div><div class="snk-text">Karya dilarang untuk melatih AI. Artist boleh posting bebas. Client boleh pakai dengan kredit untuk keperluan pribadi.</div></div>
+      <div class="snk-item"><div class="snk-num">1</div><div class="snk-text">Pembayaran dilakukan di muka melalui QRIS untuk menghindari hit & run.</div></div>
+      <div class="snk-item"><div class="snk-num">2</div><div class="snk-text">Estimasi 2–14 hari kerja (reguler) atau 1–10 hari (rush), dihitung sejak pembayaran terkonfirmasi.</div></div>
+      <div class="snk-item"><div class="snk-num">3</div><div class="snk-text">Isi formulir dengan cermat dan kirimkan ke <a href="https://t.me/jajanmurahbot" target="_blank">@jajanmurahbot</a>. Detail permintaan harus spesifik dan jelas.</div></div>
+      <div class="snk-item"><div class="snk-num">4</div><div class="snk-text">IP dengan perlindungan ketat (Disney, Sanrio, Nintendo, Marvel/DC, dll.) tidak dapat diterima.</div></div>
+      <div class="snk-item"><div class="snk-num">5</div><div class="snk-text">Progress bisa dipantau kapan saja via <a href="https://desmonwaren-cell.github.io/progressart/" target="_blank">website progress</a>. Client boleh menghubungi jika tenggat sudah terlewat.</div></div>
+      <div class="snk-item"><div class="snk-num">6</div><div class="snk-text">Revisi hanya bisa diminta dalam 24 jam setelah file dikirimkan (file disimpan 1 hari).</div></div>
+      <div class="snk-item"><div class="snk-num">7</div><div class="snk-text">Revisi minor 2× gratis. Revisi tambahan dikenakan biaya 20–50% dari harga karya.</div></div>
+      <div class="snk-item"><div class="snk-num">8</div><div class="snk-text">Penggunaan komersial non-jual +100%, untuk dijual +200% dari harga karya.</div></div>
+      <div class="snk-item"><div class="snk-num">9</div><div class="snk-text">Client bertanggung jawab penuh atas hak cipta referensi yang diberikan.</div></div>
+      <div class="snk-item highlight"><div class="snk-num">10</div><div class="snk-text">Tidak ada pembatalan atau pengembalian dana setelah nama client masuk daftar order, dengan alasan apapun.</div></div>
+      <div class="snk-item"><div class="snk-num">11</div><div class="snk-text">Order dibuka melalui sistem batch mingguan (Jumat–Minggu).</div></div>
+      <div class="snk-item ref-item" style="grid-column:1/-1">
+        <div class="snk-num">©</div>
+        <div class="snk-text">
+          <strong>Reference & Copyright Policy</strong> — Setiap referensi yang dikirimkan buyer harus merupakan milik pribadi atau sudah memiliki izin penggunaan. Dengan mengirimkan referensi, buyer menyatakan memiliki hak atau lisensi yang sah, termasuk untuk karya turunan. Artist tidak bertanggung jawab atas pelanggaran hak cipta dari referensi tidak sah.
+          <br/><a href="https://telegra.ph/Reference--Copyright-Policy-12-03" target="_blank">Baca selengkapnya ➜</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- LINKS -->
+<section id="links">
+  <div class="container">
+    <div class="reveal"><span class="section-tag">➜ Tautan</span></div>
+    <h2 class="section-title reveal d1">Link Penting</h2>
+    <p class="section-desc reveal d2">Semua yang kamu butuhkan ada di sini!</p>
+    <div class="links-grid">
+      <a href="https://t.me/artcravin" target="_blank" class="link-card reveal d1"><div class="lname">Artist</div><div class="ldesc">@artcravin</div></a>
+      <a href="https://t.me/cravingsong" target="_blank" class="link-card reveal d2"><div class="lname">Hasil Karya</div><div class="ldesc">@cravingsong</div></a>
+      <a href="https://t.me/pesansuar" target="_blank" class="link-card reveal d3"><div class="lname">Testimoni</div><div class="ldesc">@pesansuar</div></a>
+      <a href="https://t.me/cravingsong/127" target="_blank" class="link-card reveal d1"><div class="lname">QRIS Bayar</div><div class="ldesc">Scan & Transfer</div></a>
+      <a href="https://desmonwaren-cell.github.io/progressart/" target="_blank" class="link-card reveal d2"><div class="lname">Cek Progress</div><div class="ldesc">desmonwaren-cell.github.io</div></a>
+      <a href="https://t.me/jajanmurahbot" target="_blank" class="link-card reveal d3"><div class="lname">Order Bot</div><div class="ldesc">@jajanmurahbot</div></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-logo">CravingART ✦</div>
+  <div class="f-sub">Digital Art Commission · Sejak 28 Januari 2021</div>
+  <div class="f-links">
+    <a href="https://telegra.ph/PENGETAHUAN-DASAR-03-03" target="_blank">Pengetahuan Dasar</a>
+    <a href="https://telegra.ph/SYARAT--KETENTUAN-03-03" target="_blank">Syarat & Ketentuan</a>
+    <a href="https://telegra.ph/SISTEM-BATCH--ANTREAN-03-03" target="_blank">Sistem Batch</a>
+    <a href="https://telegra.ph/Reference--Copyright-Policy-12-03" target="_blank">Copyright Policy</a>
+    <a href="https://telegra.ph/PROCESS-AND-INRUSH-INFORMATION-01-18" target="_blank">Info Rush</a>
+    <a href="https://telegra.ph/USAGE-RIGHTS--LICENSE-TERMS-01-05-2" target="_blank">Usage Rights</a>
+    <a href="https://telegra.ph/sahabART-02-05" target="_blank">SahabART</a>
+    <a href="https://telegra.ph/FAMILY-CARDLOYALTY-CARD-03-03" target="_blank">Family Card</a>
+  </div>
+  <div class="f-copy">© 2021–2026 Craving ART · All rights reserved · Original art by @artcraving · No reposting as your own work.</div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+<a href="https://t.me/jajanmurahbot" target="_blank" class="float-btn">➜ Order Sekarang</a>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      } else {
+        if (e.boundingClientRect.bottom < 0) e.target.classList.remove('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+
+  function toggleToc() {
+    const btn = document.getElementById('tocBtn');
+    const dd = document.getElementById('tocDropdown');
+    btn.classList.toggle('open');
+    dd.classList.toggle('open');
+  }
+  function closeToc() {
+    document.getElementById('tocBtn').classList.remove('open');
+    document.getElementById('tocDropdown').classList.remove('open');
+  }
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.toc-wrap')) closeToc();
+  });
+
+  function switchTab(id) {
+    document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.cat-panel').forEach(p => p.classList.remove('active'));
+    document.querySelector('[onclick="switchTab(\''+id+'\')"]').classList.add('active');
+    document.getElementById('panel-' + id).classList.add('active');
+  }
+</script>
+</body>
+</html>
