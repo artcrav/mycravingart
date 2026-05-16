@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Komorebi Atelier | Art Commission</title>
+    <script src="https://tailwindcss.com"></script>
+    <link href="https://googleapis.com" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sunset-orange': '#D96B43', 'sunset-glow': '#EBB15B',
+                        'earth-brown': '#3E3431', 'forest-deep': '#2A3429',
+                        'forest-moss': '#4A5844', 'warm-sand': '#F4EFEA',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Playfair Display', 'Noto Serif JP', serif; }
+        .gradient-senja { background: linear-gradient(to bottom, #2A3429, #3E3431, #D96B43, #EBB15B); }
+    </style>
+</head>
+<body class="bg-warm-sand text-earth-brown antialiased">
+    <header class="relative gradient-senja text-warm-sand min-h-screen flex flex-col justify-between p-6 overflow-hidden">
+        <nav class="flex justify-between items-center z-20">
+            <div class="text-xl font-bold tracking-widest uppercase">木漏れ日 <span class="block text-xs font-light lowercase tracking-normal">komorebi atelier</span></div>
+            <div class="space-x-4 text-sm font-light">
+                <a href="#gallery" class="hover:text-sunset-glow">Gallery</a>
+                <a href="#prices" class="hover:text-sunset-glow">Prices</a>
+            </div>
+        </nav>
+        <div class="max-w-3xl my-auto z-20 pt-12">
+            <p class="text-sunset-glow text-sm tracking-widest uppercase mb-3">Custom Art Commission</p>
+            <h1 class="text-3xl md:text-5xl font-bold leading-tight mb-6">Menangkap Kehangatan Senja & Misteri Hutan</h1>
+            <p class="text-base text-warm-sand/80 font-light mb-8">Ilustrasi custom dengan estetika tradisional Jepang dan palet warna tanah.</p>
+            <a href="#prices" class="border-2 border-warm-sand text-warm-sand px-6 py-2 rounded-md inline-block">Lihat Harga</a>
+        </div>
+    </header>
+
+    <section id="gallery" class="py-16 bg-forest-deep text-warm-sand px-6">
+        <h2 class="text-2xl font-bold text-center mb-8">Karya Sebelumnya</h2>
+        <div class="grid grid-cols-1 gap-6">
+            <div class="bg-earth-brown h-64 rounded p-4 flex items-center justify-center text-warm-sand/40 italic">[Foto: Hutan Senja]</div>
+            <div class="bg-[#5C4D46] h-64 rounded p-4 flex items-center justify-center text-warm-sand/40 italic">[Foto: Karakter Jepang]</div>
+        </div>
+    </section>
+    <section id="prices" class="py-16 px-6 max-w-xl mx-auto">
+        <h2 class="text-2xl font-bold text-center mb-8">Daftar Harga</h2>
+        <div class="space-y-6">
+            <div class="border-b border-earth-brown/20 pb-4 flex justify-between">
+                <div><h3 class="font-bold">Portrait / Headshot</h3><p class="text-xs text-earth-brown/70">Fokus karakter wajah</p></div>
+                <span class="font-bold text-sunset-orange">Rp 250k</span>
+            </div>
+            <div class="border-b border-earth-brown/20 pb-4 flex justify-between">
+                <div><h3 class="font-bold">Full Scenery</h3><p class="text-xs text-earth-brown/70">Pemandangan hutan penuh</p></div>
+                <span class="font-bold text-sunset-orange">Rp 700k</span>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
